@@ -608,7 +608,8 @@ public class PropertyCodegen {
             StackValue.Property receiver = codegen.intermediateValueForProperty(propertyDescriptor, true, null, StackValue.LOCAL_0);
             StackValue lastValue = invokeDelegatedPropertyConventionMethod(codegen, resolvedCall, receiver, propertyDescriptor);
             Type asmType = signature.getReturnType();
-            lastValue.put(asmType, v);
+            KotlinType kotlinReturnType = propertyAccessorDescriptor.getOriginal().getReturnType();
+            lastValue.put(asmType, kotlinReturnType, v);
             v.areturn(asmType);
         }
     }
